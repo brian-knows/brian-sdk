@@ -1,5 +1,7 @@
 /src
 /node_modules
+/.github
+/test
 
 .env
 .DS_Store
@@ -7,4 +9,5 @@
 
 tsconfig.json
 tsup.config.ts
+jest.config.ts
 bun.lockb
