@@ -1,0 +1,10 @@
+/src
+/node_modules
+
+.env
+.DS_Store
+.vscode
+
+tsconfig.json
+tsup.config.ts
+bun.lockb
