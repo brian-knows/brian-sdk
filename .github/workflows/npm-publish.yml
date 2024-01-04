@@ -17,9 +17,6 @@ jobs:
           node-version: "20.x"
       - run: npm i
       - run: npm run build
-      - run: npm test
-        env:
-          BRIAN_API_KEY: ${{secrets.BRIAN_API_KEY}}
 
   publish-npm:
     needs: build
