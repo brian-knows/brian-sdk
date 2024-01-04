@@ -15,9 +15,16 @@
     "build": "tsup",
     "test": "jest"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "brian",
+    "ai",
+    "web3",
+    "typescript",
+    "javascript",
+    "sdk"
+  ],
+  "author": "Brian",
+  "license": "MIT",
   "devDependencies": {
     "@jest/globals": "^29.7.0",
     "jest": "^29.7.0",
