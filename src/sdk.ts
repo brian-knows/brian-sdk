@@ -1,4 +1,4 @@
-import ky from "../node_modules/ky/distribution/index";
+import ky from "ky";
 import {
   BadRequestError,
   InternalServerError,
@@ -26,10 +26,14 @@ import {
 export class BrianSDK {
   private apiUrl: string;
   private apiVersion: string;
-  private headers: {
-    accept: "application/json";
-    "Content-Type": "application/json";
-    "x-brian-api-key": string;
+  private options: {
+    headers: {
+      accept: "application/json";
+      "Content-Type": "application/json";
+      "x-brian-api-key": string;
+    };
+    timeout: number;
+    throwHttpErrors: boolean;
   };
 
   /**
@@ -47,10 +51,14 @@ export class BrianSDK {
         message: `Invalid API Key: ${apiKey}`,
       });
     }
-    this.headers = {
-      accept: "application/json",
-      "Content-Type": "application/json",
-      "x-brian-api-key": apiKey,
+    this.options = {
+      headers: {
+        accept: "application/json",
+        "Content-Type": "application/json",
+        "x-brian-api-key": apiKey,
+      },
+      throwHttpErrors: false,
+      timeout: 30000,
     };
     this.apiVersion = apiVersion || "v0";
   }
@@ -68,8 +76,7 @@ export class BrianSDK {
           ...body,
           kb: "public-knowledge-box",
         }),
-        headers: this.headers,
-        throwHttpErrors: false,
+        ...this.options,
       }
     );
     if (!response.ok) {
@@ -101,8 +108,7 @@ export class BrianSDK {
         body: JSON.stringify({
           ...body,
         }),
-        headers: this.headers,
-        throwHttpErrors: false,
+        ...this.options,
       }
     );
     if (!response.ok) {
@@ -136,8 +142,7 @@ export class BrianSDK {
         body: JSON.stringify({
           ...body,
         }),
-        headers: this.headers,
-        throwHttpErrors: false,
+        ...this.options,
       }
     );
     if (!response.ok) {
@@ -170,8 +175,7 @@ export class BrianSDK {
         body: JSON.stringify({
           ...body,
         }),
-        headers: this.headers,
-        throwHttpErrors: false,
+        ...this.options,
       }
     );
     if (!response.ok) {
