@@ -4,7 +4,7 @@
   "description": "Official Typescript SDK for Brian AI.",
   "homepage": "https://docs.brianknows.org",
   "repository": {
-    "url": "https://github.com/brian-knows/brian-sdk"
+    "url": "git+https://github.com/brian-knows/brian-sdk"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
