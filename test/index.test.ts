@@ -4,9 +4,6 @@ import {
   BrianSDK,
   SDKInitializationError,
 } from "../dist/index.cjs";
-// import dotenv from "dotenv";
-
-// dotenv.config();
 
 const BRIAN_API_KEY = process.env.BRIAN_API_KEY;
 const TIMEOUT = 30000;
