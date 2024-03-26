@@ -44,8 +44,11 @@ type PromptRequestBody = {
 /**
  * @dev Request body sent to /agent/knowledge.
  * @property {string} prompt - The prompt to send to the Brian API.
+ * @property {string} kb - The knowledge base to use for the prompt.
  */
-export type AskRequestBody = PromptRequestBody;
+export type AskRequestBody = PromptRequestBody & {
+  kb: string;
+};
 
 /**
  * @dev Response body received from /agent/knowledge.

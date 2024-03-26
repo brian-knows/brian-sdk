@@ -74,7 +74,6 @@ export class BrianSDK {
       {
         body: JSON.stringify({
           ...body,
-          kb: "public-knowledge-box",
         }),
         ...this.options,
       }
