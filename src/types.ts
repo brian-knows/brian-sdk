@@ -170,12 +170,13 @@ export type TransactionResponse = {
 
 export type TransactionResult = {
   action: Action;
+  data: TransactionData;
 };
 
 /**
  * @dev Transaction data.
  * @property {TransactionStep[]} steps - The steps of the transaction.
- * @property {string} text - The text of the transaction.
+ * @property {string} description - The description of the transaction.
  * @property {number} fromChainId - The chain ID to send the transaction from.
  * @property {string} fromAmount - The amount to send from the transaction.
  * @property {Token} fromToken - The token to send from the transaction.
@@ -187,8 +188,8 @@ export type TransactionResult = {
  * @property {string} toAddress - The address to send to the transaction.
  */
 export type TransactionData = {
+  description: string;
   steps?: TransactionStep[];
-  text?: string;
   fromChainId?: number;
   fromAmount?: `${number}`;
   fromToken?: Token;
