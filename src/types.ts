@@ -139,7 +139,9 @@ export type Completion = {
 /**
  * @dev Request body sent to /agent/smart-contracts.
  */
-export type GenerateCodeRequestBody = PromptRequestBody;
+export type GenerateCodeRequestBody = PromptRequestBody & {
+  context?: ContextMessage[];
+};
 
 /**
  * @dev Response body received from /agent/smart-contracts.
@@ -217,4 +219,49 @@ export type TransactionStep = {
   to: `0x${string}`;
   value: `${number}`;
   data: `0x${string}`;
+};
+
+/**
+ * @dev Request body sent to /utils/explain.
+ * @property {string} prompt - The prompt to send to the Brian API.
+ */
+export type ExplainRequestBody = PromptRequestBody;
+
+/**
+ * @dev Response body received from /utils/explain.
+ * @property {string | null} result - The result from the Brian API.
+ */
+export type ExplainResponse = {
+  result: string | null;
+};
+
+/**
+ * @dev Request body sent to /utils/compile.
+ * @property {string} prompt - The prompt to send to the Brian API.
+ * @property {string} contractName - The name of the contract to compile.
+ */
+export type CompileRequestBody = PromptRequestBody & {
+  contractName: string;
+};
+
+/**
+ * @dev Response body received from /utils/compile.
+ * @property {any} abi - The ABI of the contract.
+ * @property {string} bytecode - The bytecode of the contract.
+ * @property {string} fileName - The file name of the contract.
+ */
+export type CompileResponse = {
+  abi: any;
+  bytecode: `0x${string}`;
+  fileName: string;
+};
+
+/**
+ * @dev Context message type.
+ * @property {"user" | "agent" | "system"} role - The role of the message.
+ * @property {string} content - The content of the message.
+ */
+export type ContextMessage = {
+  role: "user" | "agent" | "system";
+  content: string;
 };

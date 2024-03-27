@@ -10,6 +10,10 @@ import {
   AskResponse,
   AskResult,
   BrianSDKOptions,
+  CompileRequestBody,
+  CompileResponse,
+  ExplainRequestBody,
+  ExplainResponse,
   ExtractParametersRequestBody,
   ExtractParametersResponse,
   ExtractParametersResult,
@@ -189,6 +193,65 @@ export class BrianSDK {
       }
     }
     const { result } = await response.json<TransactionResponse>();
+    return result;
+  }
+
+  /**
+   * @dev Compiles a given code.
+   * @param {CompileRequestBody} body - The request body sent to the Brian API.
+   * @returns {CompileResponse} The result from the Brian API.
+   */
+  async compile(body: CompileRequestBody): Promise<CompileResponse> {
+    const response = await ky.post(
+      `${this.apiUrl}/api/${this.apiVersion}/utils/compile`,
+      {
+        body: JSON.stringify({
+          ...body,
+        }),
+        ...this.options,
+      }
+    );
+    if (!response.ok) {
+      if (response.status === 400) {
+        throw new BadRequestError({ cause: response });
+      }
+      if (response.status === 429) {
+        throw new RateLimitError({ cause: response });
+      }
+      if (response.status === 500) {
+        throw new InternalServerError({ cause: response });
+      }
+    }
+    return await response.json<CompileResponse>();
+  }
+
+  /**
+   * @dev Explains a given code.
+   * @param {ExplainRequestBody} body - The request body sent to the Brian API.
+   * @returns {string | null} The result from the Brian API.
+   */
+  async explain(body: ExplainRequestBody): Promise<string | null> {
+    const response = await ky.post(
+      `${this.apiUrl}/api/${this.apiVersion}/utils/explain`,
+      {
+        body: JSON.stringify({
+          ...body,
+        }),
+        ...this.options,
+      }
+    );
+    if (!response.ok) {
+      if (response.status === 400) {
+        throw new BadRequestError({ cause: response });
+      }
+      if (response.status === 429) {
+        throw new RateLimitError({ cause: response });
+      }
+      if (response.status === 500) {
+        throw new InternalServerError({ cause: response });
+      }
+    }
+    const { result } = await response.json<ExplainResponse>();
     return result;
   }
 }
