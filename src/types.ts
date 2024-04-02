@@ -155,11 +155,11 @@ export type GenerateCodeResponse = {
  * @dev Request body sent to /agent/transaction.
  * @property {string} prompt - The prompt to send to the Brian API.
  * @property {string} address - The address to send the transaction from.
- * @property {number} chainId - The chain ID to send the transaction from (optional).
+ * @property {`${number}`} chainId - The chain ID to send the transaction from (optional).
  */
 export type TransactionRequestBody = PromptRequestBody & {
   address: string;
-  chainId?: number;
+  chainId?: `${number}`;
 };
 
 /**

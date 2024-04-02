@@ -39,6 +39,7 @@ describe("SDK tests", () => {
       async () => {
         const result = await brian.ask({
           prompt: "What is Uniswap?",
+          kb: "public-knowledge-box",
         });
         expect(result.text).not.toBeNull();
         expect(result.sourceDocuments).not.toBeNull();
@@ -46,9 +47,9 @@ describe("SDK tests", () => {
       TIMEOUT
     );
     test("asks Brian a question with an empty prompt", async () => {
-      expect(async () => await brian.ask({ prompt: "" })).rejects.toThrow(
-        BadRequestError
-      );
+      expect(
+        async () => await brian.ask({ prompt: "", kb: "public-knowledge-box" })
+      ).rejects.toThrow(BadRequestError);
     });
   });
   /****************************
