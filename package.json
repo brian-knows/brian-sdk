@@ -1,13 +1,13 @@
 {
   "name": "@brian-ai/sdk",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Official Typescript SDK for Brian AI.",
   "homepage": "https://docs.brianknows.org",
   "repository": {
     "url": "git+https://github.com/brian-knows/brian-sdk"
   },
   "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "module": "./dist/index.cjs",
   "type": "module",
   "types": "./dist/index.d.ts",
   "scripts": {
