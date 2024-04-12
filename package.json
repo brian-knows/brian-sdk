@@ -7,7 +7,10 @@
     "url": "git+https://github.com/brian-knows/brian-sdk"
   },
   "main": "./dist/index.js",
-  "module": "./dist/index.cjs",
+  "exports": {
+    "import": "./dist/index.js",
+    "require": "./dist/index.cjs"
+  },
   "type": "module",
   "types": "./dist/index.d.ts",
   "scripts": {
