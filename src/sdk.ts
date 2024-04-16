@@ -83,14 +83,15 @@ export class BrianSDK {
       }
     );
     if (!response.ok) {
+      const cause = await response.json();
       if (response.status === 400) {
-        throw new BadRequestError({ cause: response });
+        throw new BadRequestError({ cause });
       }
       if (response.status === 429) {
-        throw new RateLimitError({ cause: response });
+        throw new RateLimitError({ cause });
       }
       if (response.status === 500) {
-        throw new InternalServerError({ cause: response });
+        throw new InternalServerError({ cause });
       }
     }
     const { result } = await response.json<AskResponse>();
@@ -115,14 +116,15 @@ export class BrianSDK {
       }
     );
     if (!response.ok) {
+      const cause = await response.json();
       if (response.status === 400) {
-        throw new BadRequestError({ cause: response });
+        throw new BadRequestError({ cause });
       }
       if (response.status === 429) {
-        throw new RateLimitError({ cause: response });
+        throw new RateLimitError({ cause });
       }
       if (response.status === 500) {
-        throw new InternalServerError({ cause: response });
+        throw new InternalServerError({ cause });
       }
     }
     const { result } = await response.json<ExtractParametersResponse>();
@@ -149,14 +151,15 @@ export class BrianSDK {
       }
     );
     if (!response.ok) {
+      const cause = await response.json();
       if (response.status === 400) {
-        throw new BadRequestError({ cause: response });
+        throw new BadRequestError({ cause });
       }
       if (response.status === 429) {
-        throw new RateLimitError({ cause: response });
+        throw new RateLimitError({ cause });
       }
       if (response.status === 500) {
-        throw new InternalServerError({ cause: response });
+        throw new InternalServerError({ cause });
       }
     }
     const { result } = await response.json<GenerateCodeResponse>();
@@ -182,14 +185,15 @@ export class BrianSDK {
       }
     );
     if (!response.ok) {
+      const cause = await response.json();
       if (response.status === 400) {
-        throw new BadRequestError({ cause: response });
+        throw new BadRequestError({ cause });
       }
       if (response.status === 429) {
-        throw new RateLimitError({ cause: response });
+        throw new RateLimitError({ cause });
       }
       if (response.status === 500) {
-        throw new InternalServerError({ cause: response });
+        throw new InternalServerError({ cause });
       }
     }
     const { result } = await response.json<TransactionResponse>();
@@ -212,14 +216,15 @@ export class BrianSDK {
       }
     );
     if (!response.ok) {
+      const cause = await response.json();
       if (response.status === 400) {
-        throw new BadRequestError({ cause: response });
+        throw new BadRequestError({ cause });
       }
       if (response.status === 429) {
-        throw new RateLimitError({ cause: response });
+        throw new RateLimitError({ cause });
       }
       if (response.status === 500) {
-        throw new InternalServerError({ cause: response });
+        throw new InternalServerError({ cause });
       }
     }
     return await response.json<CompileResponse>();
@@ -241,14 +246,15 @@ export class BrianSDK {
       }
     );
     if (!response.ok) {
+      const cause = await response.json();
       if (response.status === 400) {
-        throw new BadRequestError({ cause: response });
+        throw new BadRequestError({ cause });
       }
       if (response.status === 429) {
-        throw new RateLimitError({ cause: response });
+        throw new RateLimitError({ cause });
       }
       if (response.status === 500) {
-        throw new InternalServerError({ cause: response });
+        throw new InternalServerError({ cause });
       }
     }
     const { result } = await response.json<ExplainResponse>();
