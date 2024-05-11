@@ -1,4 +1,4 @@
-# @brian/sdk
+# @brian-ai/sdk
 
 <div style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
     <img src="https://www.brianknows.org/brian_logo.png" height="200px" />
@@ -8,20 +8,20 @@ Welcome to the official repository for the [**Brian**](https://brianknows.org) T
 
 ## 📦 Installation
 
-The Brian SDK is available as an [npm package](https://www.npmjs.com/package/@brian/sdk). In order to add it to your project, you need to run one of the following commands:
+The Brian SDK is available as an [npm package](https://www.npmjs.com/package/@brian-ai/sdk). In order to add it to your project, you need to run one of the following commands:
 
 ```bash
 # Using npm
-npm install @brian/sdk
+npm install @brian-ai/sdk
 
 # Using yarn
-yarn add @brian/sdk
+yarn add @brian-ai/sdk
 
 # Using pnpm
-pnpm add @brian/sdk
+pnpm add @brian-ai/sdk
 
 # Using bun
-bun add @brian/sdk
+bun add @brian-ai/sdk
 ```
 
 ## ⚒️ Usage
@@ -30,7 +30,7 @@ Once you have it installed in your project, you just need to import it and insta
 
 ```typescript
 // Using ES6 imports
-import { BrianSDK } from "@brian/sdk";
+import { BrianSDK } from "@brian-ai/sdk";
 
 const options = {
   apiKey: process.env.BRIAN_API_KEY,
@@ -39,7 +39,7 @@ const options = {
 const brian = new BrianSDK(options);
 
 // Using CommonJS imports
-const { BrianSDK } = require("@brian/sdk");
+const { BrianSDK } = require("@brian-ai/sdk");
 
 const brian = new BrianSDK(options);
 ```
