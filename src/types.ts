@@ -29,6 +29,16 @@ export type Action =
   | "askbrian";
 
 /**
+ * @dev Brian chat message type.
+ * @property {"user" | "brian"} sender - The sender of the message.
+ * @property {string} content - The content of the message.
+ */
+export type Message = {
+  sender: "user" | "brian";
+  content: string;
+};
+
+/**
  * @dev Token type.
  * @property {string} address - The address of the token.
  * @property {number} chainId - The chain ID of the token.
@@ -412,3 +422,25 @@ export type Network = {
 export type NetworksResponse = {
   result: Network[];
 };
+
+/**
+ * @dev Request body sent to /agent.
+ * @property {string} prompt - The prompt to send to the Brian API.
+ * @property {string} address - The address to send the transaction from.
+ * @property {string} chainId - The chain ID to send the transaction from.
+ * @property {Message[]} messages - The chat context.
+ */
+export type ChatRequestBody = TransactionRequestBody & {
+  messages: Message[];
+};
+
+/**
+ * @dev Response body received from /agent in case of error.
+ * @property {string} error - The error message.
+ */
+export type ChatMissingParameterResponse = {
+  error: string;
+};
+
+/** @dev Chat response type. */
+export type ChatResponse = TransactionResponse | AskResponse;

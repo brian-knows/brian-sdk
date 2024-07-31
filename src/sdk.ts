@@ -10,6 +10,9 @@ import {
   AskResponse,
   AskResult,
   BrianSDKOptions,
+  ChatMissingParameterResponse,
+  ChatRequestBody,
+  ChatResponse,
   CompileRequestBody,
   CompileResponse,
   ExplainRequestBody,
@@ -70,6 +73,39 @@ export class BrianSDK {
     };
     this.apiVersion = apiVersion || "v0";
     this.kb = new BrianKnowledgeBaseSDK({ apiUrl, apiKey, apiVersion });
+  }
+
+  /**
+   * @dev Chat with the Brian agent via API.
+   * @param {ChatRequestBody} body - The request body sent to the Brian API.
+   * @returns {Promise<TransactionResult[] | AskResult | ChatMissingParameterResponse>} - result of the chat with Brian.
+   */
+  async chat(
+    body: ChatRequestBody
+  ): Promise<TransactionResult[] | AskResult | ChatMissingParameterResponse> {
+    const response = await ky.post(
+      `${this.apiUrl}/api/${this.apiVersion}/agent/parameters-extraction`,
+      {
+        body: JSON.stringify({
+          ...body,
+        }),
+        ...this.options,
+      }
+    );
+    if (!response.ok) {
+      const cause = await response.json();
+      if (response.status === 400) {
+        return await response.json<ChatMissingParameterResponse>();
+      }
+      if (response.status === 429) {
+        throw new RateLimitError({ cause });
+      }
+      if (response.status === 500) {
+        throw new InternalServerError({ cause });
+      }
+    }
+    const { result } = await response.json<ChatResponse>();
+    return result;
   }
 
   /**
