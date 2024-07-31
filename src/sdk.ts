@@ -19,10 +19,13 @@ import {
   ExtractParametersResult,
   GenerateCodeRequestBody,
   GenerateCodeResponse,
+  Network,
+  NetworksResponse,
   TransactionRequestBody,
   TransactionResponse,
   TransactionResult,
 } from "./types";
+import { BrianKnowledgeBaseSDK } from "./knowledge-bases";
 
 /**
  * @dev BrianSDK is the main class for interacting with the Brian API.
@@ -39,6 +42,7 @@ export class BrianSDK {
     timeout: number;
     throwHttpErrors: boolean;
   };
+  kb: BrianKnowledgeBaseSDK;
 
   /**
    * @dev The constructor for the BrianSDK class.
@@ -65,6 +69,7 @@ export class BrianSDK {
       timeout: 30000,
     };
     this.apiVersion = apiVersion || "v0";
+    this.kb = new BrianKnowledgeBaseSDK({ apiUrl, apiKey, apiVersion });
   }
 
   /**
@@ -258,6 +263,34 @@ export class BrianSDK {
       }
     }
     const { result } = await response.json<ExplainResponse>();
+    return result;
+  }
+
+  /**
+   * @dev Returns all the networks supported by the Brian API.
+   * @returns {Network[]} array of networks supported by the Brian API.
+   */
+  async getNetworks(): Promise<Network[]> {
+    const response = await ky.get(
+      `${this.apiUrl}/api/${this.apiVersion}/utils/networks`,
+      {
+        ...this.options,
+      }
+    );
+    if (!response.ok) {
+      const cause = await response.json();
+      if (response.status === 400) {
+        throw new BadRequestError({ cause });
+      }
+      if (response.status === 429) {
+        throw new RateLimitError({ cause });
+      }
+      if (response.status === 500) {
+        throw new InternalServerError({ cause });
+      }
+    }
+
+    const { result } = await response.json<NetworksResponse>();
     return result;
   }
 }

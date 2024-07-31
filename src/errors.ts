@@ -2,7 +2,8 @@ type ErrorName =
   | "SDKInitializationError"
   | "BadRequestError"
   | "RateLimitError"
-  | "InternalServerError";
+  | "InternalServerError"
+  | "NotFoundError";
 
 /**
  * @dev Generic class for Brian SDK errors.
@@ -61,6 +62,22 @@ export class BadRequestError extends BrianSDKError {
     super({
       name: "BadRequestError",
       message: "Bad request, check your input body.",
+      cause,
+    });
+  }
+}
+
+/**
+ * @dev NotFoundError is the error thrown when the API receives a request for a non-existing entity.
+ */
+export class NotFoundError extends BrianSDKError {
+  /**
+   * @dev The constructor for the NotFoundError class.
+   */
+  constructor({ cause }: { cause?: any }) {
+    super({
+      name: "NotFoundError",
+      message: "Requested entity was not found.",
       cause,
     });
   }

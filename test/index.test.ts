@@ -4,6 +4,7 @@ import {
   BrianSDK,
   SDKInitializationError,
 } from "../dist/index.cjs";
+import "dotenv/config";
 
 const BRIAN_API_KEY = process.env.BRIAN_API_KEY;
 const TIMEOUT = 30000;
@@ -15,6 +16,7 @@ if (!BRIAN_API_KEY) {
 describe("SDK tests", () => {
   const brian = new BrianSDK({
     apiKey: BRIAN_API_KEY as string,
+    apiUrl: process.env.BRIAN_API_URL,
   });
   /****************************
    * SDK INITIALIZATION TESTS *
@@ -41,8 +43,9 @@ describe("SDK tests", () => {
           prompt: "What is Uniswap?",
           kb: "public-knowledge-box",
         });
-        expect(result.text).not.toBeNull();
-        expect(result.sourceDocuments).not.toBeNull();
+        expect(result.answer).not.toBeNull();
+        expect(result.context).not.toBeNull();
+        expect(result.input).toBe("What is Uniswap?");
       },
       TIMEOUT
     );

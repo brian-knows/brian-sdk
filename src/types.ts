@@ -1,7 +1,32 @@
 /**
  * @dev Extracted action.
  */
-export type Action = "swap" | "transfer" | "bridge" | "balance" | "wrapEth";
+export type Action =
+  | "swap"
+  | "transfer"
+  | "bridge"
+  | "balance"
+  | "wrapEth"
+  | "totalsupply"
+  | "approve"
+  | "deposit"
+  | "withdraw"
+  | "ensresolution"
+  | "ensavailability"
+  | "ensexpiration"
+  | "ensregistrationcost"
+  | "ensrenewalcost"
+  | "ensregistration"
+  | "ensrenewal"
+  | "borrow"
+  | "repay"
+  | "lendingborrowallowance"
+  | "lendingcollateral"
+  | "lendinghealthfactor"
+  | "lendingpositioninfo"
+  | "lendingborrowinfo"
+  | "lendingltv"
+  | "askbrian";
 
 /**
  * @dev Token type.
@@ -60,12 +85,14 @@ export type AskResponse = {
 
 /**
  * @dev The result from the Brian API.
- * @property {string} text - AI-generated text.
- * @property {SourceDocument[]} sourceDocuments - The source documents used to generate the text.
+ * @property {string} answer - AI-generated text.
+ * @property {string} input - The input prompt.
+ * @property {SourceDocument[]} context - The source documents used to generate the text.
  */
 export type AskResult = {
-  text: string;
-  sourceDocuments: SourceDocument[];
+  answer: string;
+  input: string;
+  context: SourceDocument[];
 };
 
 /**
@@ -264,4 +291,124 @@ export type CompileResponse = {
 export type ContextMessage = {
   role: "user" | "agent" | "system";
   content: string;
+};
+
+/**
+ * @dev Knowledge base type.
+ * @property {number} id - The ID of the knowledge base.
+ * @property {string} name - The name of the knowledge base.
+ * @property {string} description - The description of the knowledge base.
+ * @property {string} slug - The slug of the knowledge base.
+ * @property {string} createdAt - The creation date of the knowledge base.
+ * @property {KnowledgeBaseResource[]} resources - The resources of the knowledge base.
+ */
+export type KnowledgeBase = {
+  id: number;
+  name: string;
+  description: string;
+  slug: string;
+  createdAt: string;
+  resources: KnowledgeBaseResource[];
+};
+
+/**
+ * @dev Request body sent to /knowledge-bases.
+ * @property {string} name - The name of the knowledge base.
+ * @property {string} description - The description of the knowledge base.
+ */
+export type CreateKnowledgeBaseBody = {
+  name: string;
+  description: string;
+};
+
+/**
+ * @dev Response body received from /knowledge-bases.
+ * @property {KnowledgeBase} result - The result from the Brian API.
+ */
+export type CreateKnowledgeBaseResponse = {
+  result: KnowledgeBase;
+};
+
+/**
+ * @dev Knowledge base resource type.
+ * @property {number} id - The ID of the knowledge base resource.
+ * @property {string} name - The name of the knowledge base resource.
+ * @property {number} size - The size of the knowledge base resource.
+ * @property {number} knowledgeBaseId - The ID of the knowledge base.
+ * @property {string} createdAt - The creation date of the knowledge base resource.
+ */
+export type KnowledgeBaseResource = {
+  id: number;
+  name: string;
+  size: number;
+  knowledgeBaseId: number;
+  createdAt: string;
+};
+
+/**
+ * @dev Response body received from /knowledge-bases.
+ * @property {KnowledgeBase[]} result - The result from the Brian API.
+ */
+export type GetKnowledgeBasesResponse = {
+  result: KnowledgeBase[];
+};
+
+/**
+ * @dev Response body received from /knowledge-bases/:id.
+ * @property {KnowledgeBase} result - The result from the Brian API.
+ */
+export type GetKnowledgeBaseResponse = {
+  result: KnowledgeBase;
+};
+
+/**
+ * @dev Request body sent to /knowledge-bases/:id/resources.
+ * @property {"ok"} result - Result of the deletion operation.
+ */
+export type DeleteKnowledgeBoxResponse = {
+  result: "ok";
+};
+
+/**
+ * @dev Request body sent to /knowledge-bases/:id/resources.
+ * @property {string} name - The name of the knowledge base resource.
+ * @property {string} content - The content of the knowledge base resource.
+ * @property {string} source - The source of the knowledge base resource.
+ */
+export type CreateKnowledgeBaseResourceBody = {
+  name: string;
+  content: string;
+  source: string;
+};
+
+/**
+ * @dev Network currency type.
+ * @property {string} name - The name of the network currency.
+ * @property {string} symbol - The symbol of the network currency.
+ * @property {number} decimals - The decimals of the network currency.
+ */
+export type NetworkCurrency = {
+  name: string;
+  symbol: string;
+  decimals: number;
+};
+
+/**
+ * @dev Network object.
+ * @property {number} id - The ID of the network.
+ * @property {string} name - The name of the network.
+ * @property {NetworkCurrency} nativeCurrency - The native currency of the network.
+ */
+export type Network = {
+  id: number;
+  name: string;
+  nativeCurrency: NetworkCurrency;
+};
+
+/**
+ * @dev Response body received from /utils/networks.
+ * @property {Network[]} result - The result from the Brian API.
+ */
+export type NetworksResponse = {
+  result: Network[];
 };
