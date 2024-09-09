@@ -84,7 +84,7 @@ export class BrianSDK {
     body: ChatRequestBody
   ): Promise<TransactionResult[] | AskResult | ChatMissingParameterResponse> {
     const response = await ky.post(
-      `${this.apiUrl}/api/${this.apiVersion}/agent/parameters-extraction`,
+      `${this.apiUrl}/api/${this.apiVersion}/agent`,
       {
         body: JSON.stringify({
           ...body,
