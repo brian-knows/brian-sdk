@@ -83,29 +83,36 @@ export class BrianSDK {
   async chat(
     body: ChatRequestBody
   ): Promise<TransactionResult[] | AskResult | ChatMissingParameterResponse> {
-    const response = await ky.post(
-      `${this.apiUrl}/api/${this.apiVersion}/agent`,
-      {
-        body: JSON.stringify({
-          ...body,
-        }),
-        ...this.options,
+    try {
+      const response = await ky.post(
+        `${this.apiUrl}/api/${this.apiVersion}/agent`,
+        {
+          body: JSON.stringify({
+            ...body,
+          }),
+          ...this.options,
+        }
+      );
+      if (!response.ok) {
+        const cause = await response.json();
+        if (response.status === 400) {
+          return cause as ChatMissingParameterResponse;
+        }
+        if (response.status === 429) {
+          throw new RateLimitError({ cause });
+        }
+        if (response.status === 500) {
+          throw new InternalServerError({ cause });
+        }
       }
-    );
-    if (!response.ok) {
-      const cause = await response.json();
-      if (response.status === 400) {
-        return await response.json<ChatMissingParameterResponse>();
+      const { result } = await response.json<ChatResponse>();
+      return result;
+    } catch (error: any) {
+      if (error instanceof BadRequestError) {
+        return error.cause as ChatMissingParameterResponse;
       }
-      if (response.status === 429) {
-        throw new RateLimitError({ cause });
-      }
-      if (response.status === 500) {
-        throw new InternalServerError({ cause });
-      }
+      throw new InternalServerError({ cause: error.cause });
     }
-    const { result } = await response.json<ChatResponse>();
-    return result;
   }
 
   /**

@@ -210,6 +210,7 @@ export type TransactionResponse = {
 export type TransactionResult = {
   action: Action;
   data: TransactionData;
+  solver: string;
 };
 
 /**
