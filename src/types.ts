@@ -1,32 +1,29 @@
 /**
  * @dev Extracted action.
  */
-export type Action =
+type Action =
   | "swap"
   | "transfer"
   | "bridge"
   | "balance"
-  | "wrapEth"
+  | "wrap native"
+  | "unwrap native"
   | "totalsupply"
   | "approve"
   | "deposit"
+  | "stake on Lido"
   | "withdraw"
-  | "ensresolution"
-  | "ensavailability"
-  | "ensexpiration"
-  | "ensregistrationcost"
-  | "ensrenewalcost"
-  | "ensregistration"
-  | "ensrenewal"
-  | "borrow"
-  | "repay"
-  | "lendingborrowallowance"
-  | "lendingcollateral"
-  | "lendinghealthfactor"
-  | "lendingpositioninfo"
-  | "lendingborrowinfo"
-  | "lendingltv"
-  | "askbrian";
+  | "ENS Forward Resolution"
+  | "ENS Reverse Resolution"
+  | "ENS Availability"
+  | "ENS Expiration"
+  | "ENS Registration Cost"
+  | "ENS Renewal Cost"
+  | "ENS Registration"
+  | "ENS Renewal"
+  | "AAVE Borrow"
+  | "AAVE Repay"
+  | "Aave User Data";
 
 /**
  * @dev Brian chat message type.
