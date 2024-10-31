@@ -82,9 +82,7 @@ export class BrianKnowledgeBaseSDK {
       if (response.status === 429) {
         throw new RateLimitError({ cause });
       }
-      if (response.status === 500) {
-        throw new InternalServerError({ cause });
-      }
+      throw new InternalServerError({ cause });
     }
     const { result } = await response.json<CreateKnowledgeBaseResponse>();
     return result;
@@ -109,9 +107,7 @@ export class BrianKnowledgeBaseSDK {
       if (response.status === 429) {
         throw new RateLimitError({ cause });
       }
-      if (response.status === 500) {
-        throw new InternalServerError({ cause });
-      }
+      throw new InternalServerError({ cause });
     }
     const { result } = await response.json<GetKnowledgeBasesResponse>();
     return result;
@@ -137,9 +133,7 @@ export class BrianKnowledgeBaseSDK {
       if (response.status === 429) {
         throw new RateLimitError({ cause });
       }
-      if (response.status === 500) {
-        throw new InternalServerError({ cause });
-      }
+      throw new InternalServerError({ cause });
     }
     const { result } = await response.json<GetKnowledgeBaseResponse>();
     return result;
@@ -165,9 +159,7 @@ export class BrianKnowledgeBaseSDK {
       if (response.status === 429) {
         throw new RateLimitError({ cause });
       }
-      if (response.status === 500) {
-        throw new InternalServerError({ cause });
-      }
+      throw new InternalServerError({ cause });
     }
     const { result } = await response.json<DeleteKnowledgeBoxResponse>();
     return result;

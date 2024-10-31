@@ -138,9 +138,7 @@ export class BrianSDK {
       if (response.status === 429) {
         throw new RateLimitError({ cause });
       }
-      if (response.status === 500) {
-        throw new InternalServerError({ cause });
-      }
+      throw new InternalServerError({ cause });
     }
     const { result } = await response.json<AskResponse>();
     return result;
@@ -171,9 +169,7 @@ export class BrianSDK {
       if (response.status === 429) {
         throw new RateLimitError({ cause });
       }
-      if (response.status === 500) {
-        throw new InternalServerError({ cause });
-      }
+      throw new InternalServerError({ cause });
     }
     const { result } = await response.json<ExtractParametersResponse>();
     return result;
@@ -206,9 +202,7 @@ export class BrianSDK {
       if (response.status === 429) {
         throw new RateLimitError({ cause });
       }
-      if (response.status === 500) {
-        throw new InternalServerError({ cause });
-      }
+      throw new InternalServerError({ cause });
     }
     const { result } = await response.json<GenerateCodeResponse>();
     if (removeMarkdown) {
@@ -240,9 +234,7 @@ export class BrianSDK {
       if (response.status === 429) {
         throw new RateLimitError({ cause });
       }
-      if (response.status === 500) {
-        throw new InternalServerError({ cause });
-      }
+      throw new InternalServerError({ cause });
     }
     const { result } = await response.json<TransactionResponse>();
     return result;
@@ -271,9 +263,7 @@ export class BrianSDK {
       if (response.status === 429) {
         throw new RateLimitError({ cause });
       }
-      if (response.status === 500) {
-        throw new InternalServerError({ cause });
-      }
+      throw new InternalServerError({ cause });
     }
     return await response.json<CompileResponse>();
   }
@@ -301,9 +291,7 @@ export class BrianSDK {
       if (response.status === 429) {
         throw new RateLimitError({ cause });
       }
-      if (response.status === 500) {
-        throw new InternalServerError({ cause });
-      }
+      throw new InternalServerError({ cause });
     }
     const { result } = await response.json<ExplainResponse>();
     return result;
@@ -328,9 +316,7 @@ export class BrianSDK {
       if (response.status === 429) {
         throw new RateLimitError({ cause });
       }
-      if (response.status === 500) {
-        throw new InternalServerError({ cause });
-      }
+      throw new InternalServerError({ cause });
     }
 
     const { result } = await response.json<NetworksResponse>();
