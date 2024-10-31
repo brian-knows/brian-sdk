@@ -1,6 +1,6 @@
 {
   "name": "@brian-ai/sdk",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Official Typescript SDK for Brian AI.",
   "homepage": "https://docs.brianknows.org",
   "repository": {
