@@ -23,7 +23,8 @@ type Action =
   | "ENS Renewal"
   | "AAVE Borrow"
   | "AAVE Repay"
-  | "Aave User Data";
+  | "Aave User Data"
+  | "Find protocol";
 
 /**
  * @dev Brian chat message type.
@@ -175,6 +176,7 @@ export type Completion = {
  */
 export type GenerateCodeRequestBody = PromptRequestBody & {
   context?: ContextMessage[];
+  compile?: boolean;
 };
 
 /**
@@ -183,6 +185,8 @@ export type GenerateCodeRequestBody = PromptRequestBody & {
  */
 export type GenerateCodeResponse = {
   result: string;
+  abi: any;
+  bytecode: `0x${string}`;
 };
 
 /**
@@ -205,6 +209,7 @@ export type TransactionResponse = {
 };
 
 export type TransactionResult = {
+  type: "read" | "write";
   action: Action;
   data: TransactionData;
   solver: string;

@@ -190,6 +190,7 @@ export class BrianSDK {
       {
         body: JSON.stringify({
           ...body,
+          compile: !body.compile ? false : true,
         }),
         ...this.options,
       }
