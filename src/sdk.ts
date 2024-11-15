@@ -22,6 +22,7 @@ import {
   ExtractParametersResult,
   GenerateCodeRequestBody,
   GenerateCodeResponse,
+  GenerateCodeResult,
   Network,
   NetworksResponse,
   TransactionRequestBody,
@@ -69,7 +70,7 @@ export class BrianSDK {
         "x-brian-api-key": apiKey,
       },
       throwHttpErrors: false,
-      timeout: 30000,
+      timeout: 60000,
     };
     this.apiVersion = apiVersion || "v0";
     this.kb = new BrianKnowledgeBaseSDK({ apiUrl, apiKey, apiVersion });
@@ -184,7 +185,7 @@ export class BrianSDK {
   async generateCode(
     body: GenerateCodeRequestBody,
     removeMarkdown: boolean = true
-  ): Promise<string> {
+  ): Promise<GenerateCodeResult> {
     const response = await ky.post(
       `${this.apiUrl}/api/${this.apiVersion}/agent/smart-contracts`,
       {
@@ -205,11 +206,16 @@ export class BrianSDK {
       }
       throw new InternalServerError({ cause });
     }
-    const { result } = await response.json<GenerateCodeResponse>();
+    const { result, abi, bytecode } =
+      await response.json<GenerateCodeResponse>();
     if (removeMarkdown) {
-      return result.replaceAll("```solidity", "").replaceAll("```", "");
+      return {
+        result: result.replaceAll("```solidity", "").replaceAll("```", ""),
+        abi,
+        bytecode,
+      };
     }
-    return result;
+    return { result, abi, bytecode };
   }
 
   /**

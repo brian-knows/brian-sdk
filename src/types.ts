@@ -189,6 +189,12 @@ export type GenerateCodeResponse = {
   bytecode: `0x${string}`;
 };
 
+export type GenerateCodeResult = {
+  result: string;
+  abi: any;
+  bytecode: `0x${string}`;
+};
+
 /**
  * @dev Request body sent to /agent/transaction.
  * @property {string} prompt - The prompt to send to the Brian API.
