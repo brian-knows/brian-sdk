@@ -175,7 +175,7 @@ export type Completion = {
  * @dev Request body sent to /agent/smart-contracts.
  */
 export type GenerateCodeRequestBody = PromptRequestBody & {
-  context?: ContextMessage[];
+  messages?: ContextMessage[];
   compile?: boolean;
 };
 

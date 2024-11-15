@@ -192,6 +192,7 @@ export class BrianSDK {
         body: JSON.stringify({
           ...body,
           compile: !body.compile ? false : true,
+          messages: !body.messages ? [] : body.messages,
         }),
         ...this.options,
       }
