@@ -187,7 +187,7 @@ export class BrianSDK {
     removeMarkdown: boolean = true
   ): Promise<GenerateCodeResult> {
     const response = await ky.post(
-      `${this.apiUrl}/api/${this.apiVersion}/agent/smart-contracts`,
+      `${this.apiUrl}/api/${this.apiVersion}/agent/smart-contract`,
       {
         body: JSON.stringify({
           ...body,
