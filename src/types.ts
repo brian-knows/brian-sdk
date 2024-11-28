@@ -24,7 +24,8 @@ type Action =
   | "AAVE Borrow"
   | "AAVE Repay"
   | "Aave User Data"
-  | "Find protocol";
+  | "Find protocol"
+  | "deploytoken";
 
 /**
  * @dev Brian chat message type.
@@ -169,6 +170,21 @@ export type Completion = {
   address?: string;
   amount?: string;
   dest_chain?: string;
+  primaryAddress?: string;
+  owner?: string;
+  supply?: string;
+  withdrawpercentage?: string;
+  repaypercentage?: string;
+  protocol?: string;
+  duration?: string;
+  interest?: string;
+  apy?: string;
+  liquidity?: string;
+  name?: string;
+  symbol?: string;
+  uri?: string;
+  tag?: string;
+  prompt?: string;
 };
 
 /**
