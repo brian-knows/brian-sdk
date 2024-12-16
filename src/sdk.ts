@@ -207,22 +207,24 @@ export class BrianSDK {
       }
       throw new InternalServerError({ cause });
     }
-    const { result, abi, bytecode, contractName } =
+    const { result: { contract, contractName, abi, bytecode, standardJsonInput, version } } =
       await response.json<GenerateCodeResponse>();
     if (removeMarkdown) {
       return {
-        result:
-          typeof result === "object" && "contract" in result
-            ? (result as { contract: string }).contract.replaceAll("```solidity", "").replaceAll("```", "")
-            : typeof result === "string"
-              ? result.replaceAll("```solidity", "").replaceAll("```", "")
-              : result,
+        contract:
+          typeof contract === "object" && "contract" in contract
+            ? (contract as { contract: string }).contract.replaceAll("```solidity", "").replaceAll("```", "")
+            : typeof contract === "string"
+              ? contract.replaceAll("```solidity", "").replaceAll("```", "")
+              : contract,
         contractName,
         abi,
         bytecode,
+        standardJsonInput,
+        version,
       };
     }
-    return { result, abi, bytecode, contractName };
+    return { contract, contractName, abi, bytecode, standardJsonInput, version };
   }
 
   /**

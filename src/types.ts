@@ -200,17 +200,23 @@ export type GenerateCodeRequestBody = PromptRequestBody & {
  * @property {string} result - The result from the Brian API.
  */
 export type GenerateCodeResponse = {
-  result: string;
-  abi: any;
-  bytecode: `0x${string}`;
-  contractName: string;
+  result: {
+    contract: string;
+    contractName: string;
+    abi: any;
+    bytecode: `0x${string}`;
+    standardJsonInput: string;
+    version: string;
+  };
 };
 
 export type GenerateCodeResult = {
-  result: string;
+  contract: string;
+  contractName: string;
   abi: any;
   bytecode: `0x${string}`;
-  contractName: string;
+  standardJsonInput: string;
+  version: string;
 };
 
 /**
