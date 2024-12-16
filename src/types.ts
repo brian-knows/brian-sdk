@@ -203,12 +203,14 @@ export type GenerateCodeResponse = {
   result: string;
   abi: any;
   bytecode: `0x${string}`;
+  contractName: string;
 };
 
 export type GenerateCodeResult = {
   result: string;
   abi: any;
   bytecode: `0x${string}`;
+  contractName: string;
 };
 
 /**
