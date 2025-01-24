@@ -25,7 +25,9 @@ type Action =
   | "AAVE Repay"
   | "Aave User Data"
   | "Find protocol"
-  | "deploytoken";
+  | "deploytoken"
+  | "claim"
+  | "vote";
 
 /**
  * @dev Brian chat message type.
